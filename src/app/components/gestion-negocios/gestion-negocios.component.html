@@ -1,0 +1,65 @@
+<app-header-cliente></app-header-cliente>
+<div class="bg-white shadow-md rounded-md">
+    <div class="px-5 py-4">
+        <h5 class="font-bold text-xl flex items-center"><i class="fas fa-map-marker-alt mr-3"></i>Gestión de negocios</h5>
+    </div>
+    <div class="px-5 py-5">
+        <div class="mb-3">
+            <a routerLink="/crear-negocio">
+            <button type="button" class="bg-green-500 text-white px-4 py-2 rounded-md mr-2"><i class="fas fa-plus mr-1"></i>Crear</button>
+            </a>
+        </div>
+        <div class="overflow-x-auto">
+            <table class="table-auto w-full">
+                <thead>
+                    <tr>
+                        <th class="px-4 py-2">Código</th>
+                        <th class="px-4 py-2">Nombre</th>
+                        <th class="px-4 py-2">Tipo de negocio</th>
+                        <th class="px-4 py-2">Imagen destacada</th>
+                        <th class="px-4 py-2">Calificación promedio</th>
+                        <th class="px-4 py-2">Estado negocio</th>
+                        <th class="px-4 py-2"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (item of negocios; track $index){
+                        <tr>
+                            <td>
+                            <p>{{item.codigoNegocio}}</p>
+                            </td>
+                            <td>
+                            <p>{{item.nombre}}</p>
+                            </td>
+                            <td>
+                            <p>{{item.tipoNegocio}}</p>
+                            </td>
+                            <td>
+                            <img src="{{item.imagenDestacada}}" alt="{{item.nombre}}"
+                            
+                            class="img-fluid" style="max-width: 100px;"></td>
+                            
+                            <td>
+                            <p>{{item.calificacionPromedio}}</p>
+                            </td>
+                            <td>
+                            <span [ngClass]="{'text-bg-success': item.estadoNegocio ==
+                            'APROBADO', 'text-bg-danger': item.estadoNegocio == 'RECHAZADO', 'text-bg-warning':
+                            item.estadoNegocio == 'PENDIENTE' }" class="badge">{{item.estadoNegocio}}</span>
+                            
+                            </td>
+                            <td>
+                            <a routerLink="/detalle-negocio/{{item.codigoNegocio}}"><i
+                            
+                            class="fa-solid fa-circle-info me-2"></i>Ver detalle</a>
+                            
+                            </td>
+                            </tr>
+                            }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<app-footer-component></app-footer-component>
+

@@ -25,9 +25,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css", "node_modules/mapbox-gl/dist/mapbox-gl.css"
             ],
-            "scripts": []
+            "scripts": ["node_modules/mapbox-gl/dist/mapbox-gl.js"]
           },
           "configurations": {
             "production": {
@@ -91,5 +91,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "ecd378e3-9f03-4caa-99ab-d168fe3466cc"
   }
 }

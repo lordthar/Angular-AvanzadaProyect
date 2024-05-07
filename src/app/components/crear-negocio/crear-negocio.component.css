@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#mapa {
+    width: 75%;
+    height: 600px;
+    margin: auto auto;
+    margin-top: 20px;
+}

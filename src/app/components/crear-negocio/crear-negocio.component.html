@@ -1,0 +1,58 @@
+<div class="container mx-auto px-4 py-8">
+    <h2 class="text-2xl font-bold mb-4">Crear Negocio</h2>
+  
+
+    <div class="mb-4">
+      <label for="nombre" class="block text-sm font-bold mb-2">Nombre:</label>
+      <input type="text" id="nombre" class="w-full px-3 py-2 border rounded-md" placeholder="Nombre del negocio">
+    </div>
+
+    <div class="mb-4">
+      <label for="descripcion" class="block text-sm font-bold mb-2">Descripción:</label>
+      <textarea id="descripcion" class="w-full px-3 py-2 border rounded-md" placeholder="Descripción del negocio"></textarea>
+    </div>
+  
+
+    <div class="mb-4">
+      <label for="telefono" class="block text-sm font-bold mb-2">Teléfono:</label>
+      <input type="text" id="telefono" class="w-full px-3 py-2 border rounded-md" placeholder="Teléfono de contacto">
+    </div>
+
+    <div class="mb-4">
+      <label for="imagenes" class="block text-sm font-bold mb-2">Imágenes:</label>
+      <input type="file" id="imagenes" multiple class="w-full px-3 py-2 border rounded-md">
+      <p class="text-xs text-gray-500 mt-1">Selecciona una o varias imágenes para el negocio</p>
+    </div>
+
+    <form [formGroup]="horariosForm">
+      <button type="button" (click)="agregarHorario()" class="mt-6 px-4 py-2 bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-600">Agregar horario</button>
+      <div formArrayName="horarios" class="space-y-4">
+        <div *ngFor="let horario of horarios.controls; let i = index" [formGroupName]="i" class="flex space-x-3 p-4 border rounded-lg">
+          <div class="flex-1">
+            <label for="dia{{i}}" class="block text-sm font-bold mb-2">Día:</label>
+            <input type="text" id="dia{{i}}" formControlName="dia" class="w-full px-3 py-2 border rounded-md" placeholder="Día">
+          </div>
+    
+          <div class="flex-1">
+            <label for="horaInicio{{i}}" class="block text-sm font-bold mb-2">Hora de inicio:</label>
+            <input type="text" id="horaInicio{{i}}" formControlName="horaInicio" class="w-full px-3 py-2 border rounded-md" placeholder="Hora de inicio">
+          </div>
+    
+          <div class="flex-1">
+            <label for="horaFin{{i}}" class="block text-sm font-bold mb-2">Hora de fin:</label>
+            <input type="text" id="horaFin{{i}}" formControlName="horaFin" class="w-full px-3 py-2 border rounded-md" placeholder="Hora de fin">
+          </div>
+          <button type="button" (click)="eliminarHorario(i)" class="ml-3  bg-red-500 text-white rounded-md shadow-md hover:bg-red-600">Eliminar</button>
+        </div>
+      </div>
+      </form>
+  
+    <div class="mb-3 mt-6 row">
+      <label class="col-sm-2 col-form-label">Ubicación: </label>
+      <div class="col-sm-10">
+        <div id="mapa"></div>
+      </div>
+    </div>
+
+    <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Crear Negocio</button>
+  </div>
