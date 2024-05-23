@@ -1,0 +1,72 @@
+<form  #f="ngForm" class="container mx-auto px-4 py-8">
+  <h2 class="text-2xl font-bold mb-4">Crear Negocio</h2>
+
+  <div class="mb-4">
+    <label for="nombre" class="block text-sm font-bold mb-2">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" [(ngModel)]="registroNegocioDTO.nombre" class="w-full px-3 py-2 border rounded-md" placeholder="Nombre del negocio" required>
+  </div>
+
+  <div class="mb-4">
+    <label for="descripcion" class="block text-sm font-bold mb-2">Descripción:</label>
+    <textarea id="descripcion" name="descripcion" [(ngModel)]="registroNegocioDTO.descripcion" class="w-full px-3 py-2 border rounded-md" placeholder="Descripción del negocio" required></textarea>
+  </div>
+
+  <div class="mb-4">
+    <label class="block text-blue-900 mb-2">Teléfonos: </label>
+    <div *ngFor="let telefono of registroNegocioDTO.telefonos; let i = index" class="flex mb-2">
+      <input type="text" [(ngModel)]="registroNegocioDTO.telefonos[i]" name="telefono{{i}}" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500" />
+      <button type="button" class="ml-2 bg-red-500 text-white px-3 py-2 rounded-lg" (click)="eliminarTelefono(i)" *ngIf="registroNegocioDTO.telefonos.length > 1">Eliminar</button>
+    </div>
+    <button type="button" class="mt-2 bg-green-500 text-white px-3 py-2 rounded-lg" (click)="agregarTelefono()">Agregar Teléfono</button>
+  </div>
+
+  <div class="mb-4">
+    <label for="imagenes" class="block text-sm font-bold mb-2">Imágenes:</label>
+    <input type="file" id="imagenes" name="imagenes" (change)="onFileChange($event)" multiple class="w-full px-3 py-2 border rounded-md" required>
+    <p class="text-xs text-gray-500 mt-1">Selecciona una o varias imágenes para el negocio</p>
+    <div class="col-sm-2">
+      <button type="submit" [disabled]="archivos == null" class="btn btn-primary" (click)="subirImagen()">
+        <i class="fa-solid fa-cloud-arrow-up me-2"></i>Subir Foto
+      </button>
+    </div>
+  </div>
+
+  <div class="mb-4">
+    <label class="block text-blue-900 mb-2">Tipo de Negocio: </label>
+    <select [(ngModel)]="registroNegocioDTO.tipoNegocio" name="tipoNegocio" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500" required>
+        <option value="BAR">Bar</option>
+        <option value="TIENDA">Tienda</option>
+        <option value="SUPERMERCADO">Supermercado</option>
+        <option value="DISCOTECA">Discoteca</option>
+        <option value="PANADERIA">Panaderia</option>
+        <option value="MUSEO">Museo</option>
+        <option value="RESTAURANTE">Restaurante</option>
+        <option value="CAFETERIA">Cafeteria</option>
+        <option value="OTRO">Otro</option>
+      </select>
+  </div>
+
+  <div class="mb-4">
+    <label class="block text-blue-900 mb-2">Horarios: </label>
+    <div *ngFor="let horario of registroNegocioDTO.horarios; let i = index" class="flex mb-2">
+      <select [(ngModel)]="horario.dia" name="dia{{i}}" class="w-1/3 px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500"  required>
+        <option value="" disabled selected>Selecciona un día</option>
+        @for (item of dias; track $index) { <option [value]="item" >{{item}}</option> }
+      </select>
+      <input type="time" [(ngModel)]="horario.horaInicio" name="horaInicio{{i}}" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500" placeholder="Hora de inicio" required />
+      <input type="time" [(ngModel)]="horario.horaFin" name="horaFin{{i}}" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500" placeholder="Hora de fin" required />
+      <button type="button" class="ml-2 bg-red-500 text-white px-3 py-2 rounded-lg" (click)="eliminarHorario(i)" *ngIf="registroNegocioDTO.horarios.length > 1">Eliminar</button>
+    </div>
+    <button type="button" class="mt-2 bg-green-500 text-white px-3 py-2 rounded-lg" (click)="agregarHorario()">Agregar Horario</button>
+  </div>
+
+  <div class="mb-3 mt-6 row">
+    <label class="col-sm-2 col-form-label">Ubicación: </label>
+    <div class="col-sm-10">
+      <div id="mapa"></div>
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="f.invalid" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600" (click)="crearNegocio()">Crear Negocio</button>
+  <app-alerta-component [alerta]="alerta"></app-alerta-component>
+</form>

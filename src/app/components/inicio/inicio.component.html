@@ -1,0 +1,9 @@
+
+<app-header-inicio></app-header-inicio>
+<div class="mapa-container">
+    <div id="mapa" (click)="onMapClick($event)"></div>
+    <app-negocio-detalle-component *ngIf="mostrarCard" [negocio]="negocioSeleccionado" class="card-animation"></app-negocio-detalle-component>
+  </div>
+  <button (click)="obtenerUbicacion()">Mostrar Cercanos</button>
+<app-footer-component></app-footer-component>
+

@@ -1,0 +1,32 @@
+#mapa {
+    width: 70%;
+    height: 600px;
+    margin: auto;
+    margin-top: 20px;
+    transition: margin-left 0.5s ease; 
+}
+
+
+.mapa-container {
+    display: flex;
+    flex-direction: row-reverse;
+
+}
+  
+  app-negocio-detalle-component {
+    width: 25%;
+    height: 500px;
+    overflow-y: auto;
+
+  }
+
+  .card-animation {
+    transition: transform 0.3s ease;
+    transform: translateX(100%);
+  }
+  
+  .card-animation.show-card {
+    transform: translateX(0); 
+  }
+
+  
