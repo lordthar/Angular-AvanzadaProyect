@@ -1,7 +1,9 @@
-import { Injectable } from '@angular/core';
-import { ubicacionDTO } from '../dto/ubicacionDTO';
+import { EventEmitter, Injectable } from '@angular/core';
 import { ItemNegocioDTO } from '../dto/itemNegocioDTO';
 import { Observable } from 'rxjs';
+import { NegociosService } from './negocios.service';
+import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions';
+
 declare var mapboxgl: any;
 @Injectable({
   providedIn: 'root'
@@ -9,9 +11,11 @@ declare var mapboxgl: any;
 export class MapaService {
   mapa: any;
   style: string = 'mapbox://styles/mapbox/outdoors-v12';
-  directions: any;
   marcadores: any[];
-  constructor() {
+  private directions!: MapboxDirections;
+  popup: any;
+  marcadorSeleccionado: EventEmitter<ItemNegocioDTO> = new EventEmitter<ItemNegocioDTO>();
+  constructor(private negociosService: NegociosService) {
     mapboxgl.accessToken = 'pk.eyJ1IjoibGFudGhhcnVzIiwiYSI6ImNsdnBkanNwZDAweTUybXF0YzRsempqZngifQ.YYVc3CGkIxdnrb6_JxxA4w';
     this.marcadores = [];
   }
@@ -30,6 +34,9 @@ export class MapaService {
       })
     );
   }
+
+
+  
   public agregarMarcador(): Observable<any> {
     const mapaGlobal = this.mapa;
     const marcadores = this.marcadores;
@@ -44,12 +51,49 @@ export class MapaService {
       });
     });
   }
-  public pintarMarcadores(negocios: ItemNegocioDTO[]) {
+
+  public agregarMarcadorRutas(coordenadas: number[]): void {
+    const marker = new mapboxgl.Marker()
+      .setLngLat(coordenadas)
+      .addTo(this.mapa);
+    this.marcadores.push(marker);
+  }
+
+
+  public pintarMarcadores(negocios: ItemNegocioDTO[]): void {
     negocios.forEach(negocio => {
-      new mapboxgl.Marker()
+      const markerElement = document.createElement('div');
+      markerElement.className = 'marker';
+      const marker = new mapboxgl.Marker(markerElement)
         .setLngLat([negocio.ubicacion.longitud, negocio.ubicacion.latitud])
-        .setPopup(new mapboxgl.Popup().setHTML(negocio.nombre))
         .addTo(this.mapa);
+      marker.getElement().addEventListener('click', () => {
+        this.marcadorSeleccionado.emit(negocio);
+      });
+      this.marcadores.push(marker);
     });
   }
+
+  public mostrarNegociosCercanos(latitude: number, longitude: number): void {
+    const negocios = this.negociosService.listarNegocios();
+  
+    negocios.forEach(negocio => {
+      const markerElement = document.createElement('div');
+      markerElement.className = 'marker';
+      const marker = new mapboxgl.Marker(markerElement)
+        .setLngLat([ negocio.ubicacion.latitud,negocio.ubicacion.longitud])
+        .addTo(this.mapa);
+      marker.getElement().addEventListener('click', () => {
+        this.marcadorSeleccionado.emit(negocio);
+      });
+  
+      this.marcadores.push(marker);
+    });
+  }
+
+  public mostrarRuta(origen: [number, number], destino: [number, number]): void {
+    this.directions.setOrigin(origen);
+    this.directions.setDestination(destino);
+  }
 }
+

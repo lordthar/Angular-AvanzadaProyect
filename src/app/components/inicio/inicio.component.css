@@ -3,8 +3,75 @@
 @tailwind utilities;
 
 #mapa {
-    width: 75%;
+    width: 70%;
     height: 600px;
-    margin: auto auto;
+    margin: auto;
     margin-top: 20px;
+    transition: margin-left 0.5s ease; 
 }
+
+
+.mapa-container {
+    display: flex;
+    flex-direction: row-reverse;
+
+}
+  
+  app-negocio-detalle-component {
+    width: 25%;
+    height: 500px;
+    overflow-y: auto;
+
+  }
+
+  .card-animation {
+    transition: transform 0.3s ease;
+    transform: translateX(100%);
+  }
+  
+  .card-animation.show-card {
+    transform: translateX(0); 
+  }
+
+  .mapboxgl-ctrl-directions {
+    background-color: rgba(255, 255, 255, 0.9);
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    max-width: 300px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .mapboxgl-ctrl-top-left .directions-control .mapbox-directions-input {
+    height: 36px;
+    font-size: 14px;
+    padding: 8px;
+    margin: 6px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .mapboxgl-ctrl-top-left .directions-control .mapbox-directions-instructions {
+    font-size: 14px;
+    line-height: 1.4;
+    margin-top: 10px;
+  }
+  
+  
+  .mapboxgl-ctrl-top-left .directions-control .mapbox-directions-profile button {
+    font-size: 14px;
+    padding: 6px 12px;
+    border: none;
+    background-color: #0074D9;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .mapboxgl-ctrl-top-left .directions-control .mapbox-directions-profile button:hover {
+    background-color: #0056b3;
+  }
+  
+
+  
