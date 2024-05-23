@@ -5,6 +5,7 @@ import { ItemNegocioDTO } from '../../dto/itemNegocioDTO';
 import { NegociosService } from '../../servicios/negocios.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { TokenService } from '../../servicios/token.service';
 
 @Component({
   selector: 'app-gestion-negocios-moderador',
@@ -17,13 +18,22 @@ export class GestionNegociosModeradorComponent {
 
   negocios: ItemNegocioDTO[];
 
-  constructor(private negocioService: NegociosService) {
+  constructor(private negocioService: NegociosService, private token: TokenService) {
+    
     this.negocios = [];
     this.listarNegocios();
   }
 
   public listarNegocios() {
-    this.negocios = this.negocioService.listar();
+    this.negocioService.listarNegocios().subscribe({
+      next: (data) => {
+        this.negocios.push(data);
+        console.log(data)
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
   }
 
 }

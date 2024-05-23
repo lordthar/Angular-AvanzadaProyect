@@ -59,7 +59,7 @@
             </div>
         </div>
         <div class="flex items-center">
-            <img class="rounded-full p-4 w-24" src="{{negocio.imagenDestacada}}">
+            <img class="rounded-full p-4 w-24" src="{{negocio.imagenes[0]}}">
             <p class="">nombre creador: {{negocio.nombre}}</p>
         </div>
         <textarea class="border m-4 border-black bg-gray-200 w-10/12 h-60 rounded-2xl resize-none p-2" disabled
@@ -84,7 +84,7 @@
 <div class="flex">
     <div class="flex-1"></div>
     <div class="flex-1 flex justify-center">
-        <button (click)="preuba1()" class="border border-black m-2 rounded-lg p-1 text-green-600 hover:bg-gray-300">Aprobar</button>
+        <button class="border border-black m-2 rounded-lg p-1 text-green-600 hover:bg-gray-300">Aprobar</button>
         <button (click)="this.mostrarPopup=true"
             class="border border-black m-2 rounded-lg p-1 text-red-600 hover:bg-gray-300">Rechazar</button>
     </div>
