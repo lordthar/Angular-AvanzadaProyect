@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.td-class {
+    @apply bg-transparent first:rounded-tl-3xl first:rounded-bl-3xl last:rounded-tr-3xl last:rounded-br-3xl
+  }

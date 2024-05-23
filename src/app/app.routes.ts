@@ -8,16 +8,27 @@ import { FavoritosClienteComponent } from './components/favoritos-cliente/favori
 import { ComentariosNegocioComponent } from './components/comentarios-negocio/comentarios-negocio.component';
 import { PqrsNegocioComponent } from './components/pqrs-negocio/pqrs-negocio.component';
 import { BusquedaComponent } from './components/busqueda/busqueda.component';
+import { GestionNegociosModeradorComponent } from './components/gestion-negocios-moderador/gestion-negocios-moderador.component';
+import { NegocioModeradorComponent } from './components/negocio-moderador/negocio-moderador.component';
+import { EliminarCuentaModeradorComponent } from './components/eliminar-cuenta-moderador/eliminar-cuenta-moderador.component';
+import { CambiarPasswordModeradorComponent } from './components/cambiar-password-moderador/cambiar-password-moderador.component';
+import { LoginModeradorComponent } from './components/login-moderador/login-moderador.component';
+import { LoginGuard } from './servicios/permiso.service';
 
 export const routes: Routes = [
-{ path: '', component: InicioComponent },
-{ path: 'login', component: LoginComponent },
-{ path: 'registro', component: RegistroComponent },
-{ path: "gestion-negocios", component: GestionNegociosComponent },
-{path: "crear-negocio", component:CrearNegocioComponent},
-{path: "favoritos-cliente", component:FavoritosClienteComponent},
-{path: "comentarios-negocio", component:ComentariosNegocioComponent},
-{path: "pqrs-negocio", component:PqrsNegocioComponent},
-{ path: "busqueda/:texto", component: BusquedaComponent },
-{ path: "**", pathMatch: "full", redirectTo: "" }
+    { path: '', component: InicioComponent },
+    { path: 'login', component: LoginComponent },
+    { path: 'registro', component: RegistroComponent },
+    { path: "gestion-negocios", component: GestionNegociosComponent },
+    { path: "crear-negocio", component: CrearNegocioComponent },
+    { path: "favoritos-cliente", component: FavoritosClienteComponent },
+    { path: "comentarios-negocio", component: ComentariosNegocioComponent },
+    { path: "pqrs-negocio", component: PqrsNegocioComponent },
+    { path: "busqueda/:texto", component: BusquedaComponent },
+    { path: "moderador", component: GestionNegociosModeradorComponent },
+    { path: "negocio-moderador/:id-negocio", component: NegocioModeradorComponent },
+    { path: "eliminar-moderador", component: EliminarCuentaModeradorComponent },
+    { path: "cambiar-password-moderador", component: CambiarPasswordModeradorComponent },
+    { path: "login-moderador", component: LoginModeradorComponent },
+    { path: "**", pathMatch: "full", redirectTo: "" }
 ];
