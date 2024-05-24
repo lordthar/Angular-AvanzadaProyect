@@ -19,4 +19,8 @@ private authURL = "http://localhost:8080/api/auth";
   public loginCliente(loginDTO: LoginDTO): Observable<MensajeDTO> {
     return this.http.post<MensajeDTO>(`${this.authURL}/login-cliente`, loginDTO);
   }
+
+  public loginModerador(LoginDTO: LoginDTO): Observable<MensajeDTO> {
+    return this.http.post<MensajeDTO>(`${this.authURL}/login-Moderador`, LoginDTO);
+  }
 }

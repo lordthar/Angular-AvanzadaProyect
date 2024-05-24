@@ -24,12 +24,13 @@ export class NegocioModeradorComponent {
 
   constructor(private route: ActivatedRoute, private negocioService: NegociosService) {
     this.idNegocio = "";
-    
+
     this.route.params.subscribe(params => {
       this.idNegocio = params["id-negocio"]
     });
 
     this.negocio = new ItemNegocioDTO;
+
 
     this.lista = [
       "https://picsum.photos/100", "https://picsum.photos/100", "https://picsum.photos/100",
@@ -39,7 +40,25 @@ export class NegocioModeradorComponent {
     ]
   }
 
+  public buscarNegocio() {
+    this.negocioService.obtener(this.idNegocio).subscribe({
+      next: data => {
+        this.negocio = data.respuesta[0];
+        console.log(this.negocio);
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    })
+  }
+
+  ngOnInit() {
+  }
+
   ngAfterViewInit(): void {
-    initFlowbite();
+    this.buscarNegocio();
+    setTimeout(() => {
+      initFlowbite();
+    }, 500);
   }
 }

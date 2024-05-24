@@ -8,25 +8,26 @@
 </select>
 <table class="table-auto w-full border-separate border-spacing-y-2 px-10">
     <tbody>
-        @for (item of negocios; track $index) {
-            <tr routerLink="/negocio-moderador/{{item.nombre}}" class="p-4 hover:cursor-pointer hover:bg-gray-300 bg-gray-200">
-                <td class="p-2 w-1/6 td-class">
-                    <img class="mx-auto rounded-xl border" src="{{item.imagenes}}" alt="{{item.nombre}}">
-                </td>
-                <td class="w-1/3 h-10 td-class">
-                    <div class="bg-[#E9E2E2] w-4/5 h-1/2 rounded-2xl pl-4 p-2 border border-black">
-                        <p>{{item.nombre}}</p>
-                        <p [ngClass]="item.estadoNegocio === 'RECHAZADO' ? 'text-red-600' : (item.estadoNegocio === 'APROBADO' ? 'text-green-600' : 'text-purple-600')">{{
-                            item.estadoNegocio }}</p>
-                    </div>
-                </td>
-                <td class="h-10 td-class">
-                    <div class="bg-[#E9E2E2] w-4/5 h-1/2 rounded-2xl p-4 border border-black">
-                        <p>{{item.tipoNegocio}}</p>
-                    </div>
-                </td>
-            </tr>
-        }
+        <tr *ngFor="let item of negocios" routerLink="/negocio-moderador/{{item.nombre}}"
+            class="p-4 hover:cursor-pointer hover:bg-gray-300 bg-gray-200">
+            <td class="p-2 w-1/6 td-class">
+                <img class="mx-auto rounded-xl border" src="{{item.imagenes}}" alt="{{item.nombre}}">
+            </td>
+            <td class="w-1/3 h-10 td-class">
+                <div class="bg-[#E9E2E2] w-4/5 h-1/2 rounded-2xl pl-4 p-2 border border-black">
+                    <p>{{item.nombre}}</p>
+                    <p
+                        [ngClass]="item.estadoNegocio === 'RECHAZADO' ? 'text-red-600' : (item.estadoNegocio === 'APROBADO' ? 'text-green-600' : 'text-purple-600')">
+                        {{
+                        item.estadoNegocio }}</p>
+                </div>
+            </td>
+            <td class="h-10 td-class">
+                <div class="bg-[#E9E2E2] w-4/5 h-1/2 rounded-2xl p-4 border border-black">
+                    <p>{{item.tipoNegocio}}</p>
+                </div>
+            </td>
+        </tr>
     </tbody>
 </table>
 

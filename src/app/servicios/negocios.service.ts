@@ -23,8 +23,8 @@ export class NegociosService {
     public buscar(nombre: string): Observable<ItemNegocioDTO[]> {
         return this.http.get<ItemNegocioDTO[]>(`${this.negociosURL}/filtrar-por-nombre/${nombre}`);
       }
-    public obtener(codigoNegocio: string): Observable<ItemNegocioDTO> {
-    return this.http.get<ItemNegocioDTO>(`${this.negociosURL}/buscarNegocio/${codigoNegocio}`);
+    public obtener(codigoNegocio: string): Observable<MensajeDTO> {
+    return this.http.get<MensajeDTO>(`${this.negociosURL}/buscarNegocio/${codigoNegocio}`);
     }
     public eliminar(codigoNegocio: string): Observable<MensajeDTO> {
     return this.http.delete<MensajeDTO>(`${this.negociosURL}/eliminar-negocio/${codigoNegocio}`);

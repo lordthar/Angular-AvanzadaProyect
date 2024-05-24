@@ -28,6 +28,14 @@ export class TokenService {
     window.location.reload();
     });
     }
+
+  public loginModerador(token: string) {
+    this.setToken(token);
+    this.router.navigate(["/moderador"]).then(() => {
+      window.location.reload();
+    });
+  }
+
     public logout() {
       window.sessionStorage.clear();
       this.router.navigate(["/"]).then(() => {

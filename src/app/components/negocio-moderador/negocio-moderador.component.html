@@ -11,7 +11,7 @@
             <div id="default-carousel" class="relative w-full" data-carousel="static">
                 <!-- Carousel wrapper -->
                 <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
-                    @for (item of lista; track $index) {
+                    @for (item of negocio.imagenes; track $index) {
                         <div class="hidden duration-700 ease-in-out border border-gray-600" data-carousel-item>
                             <img src="{{item}}"
                                 class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
@@ -20,7 +20,7 @@
                 </div>
                 <!-- Slider indicators -->
                 <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
-                    @for (item of lista; track $index) {
+                    @for (item of negocio.imagenes; track $index) {
                         <button type="button" class="w-3 h-3 rounded-full" aria-current="false" attr.aria-label="Slide {{$index}}"
                         data-carousel-slide-to="0"></button>
                     }
