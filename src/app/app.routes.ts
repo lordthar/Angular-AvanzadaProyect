@@ -16,7 +16,7 @@ import { LoginModeradorComponent } from './components/login-moderador/login-mode
 import { InicioClienteComponent } from './components/inicio-cliente/inicio-cliente.component';
 import { CategoriasClienteComponent } from './components/categorias-cliente/categorias-cliente.component';
 import { CategoriasGuestComponent } from './components/categorias-guest/categorias-guest.component';
-import { LoginGuard } from './guards/permiso.service';
+import { LoginGuard, LoginGuardModerador } from './guards/permiso.service';
 import { RolesGuard } from './guards/roles.service';
 
 export const routes: Routes = [
@@ -32,10 +32,10 @@ export const routes: Routes = [
     { path: "inicio-cliente", component: InicioClienteComponent }, //canActivate:[RolesGuard], data: {expectedRole: ["CLIENTE"] }},
     { path: "categorias-cliente", component: CategoriasClienteComponent },
     { path: "categorias-guest", component: CategoriasGuestComponent },
-    { path: "moderador", component: GestionNegociosModeradorComponent },
-    { path: "negocio-moderador/:id-negocio", component: NegocioModeradorComponent },
-    { path: "eliminar-moderador", component: EliminarCuentaModeradorComponent },
-    { path: "cambiar-password-moderador", component: CambiarPasswordModeradorComponent },
-    { path: "login-moderador", component: LoginModeradorComponent },
+    { path: "login-moderador", component: LoginModeradorComponent, canActivate: [LoginGuardModerador] },
+    { path: "moderador", component: GestionNegociosModeradorComponent, canActivate: [RolesGuard],data: { expectedRole: ["MODERADOR"] } },
+    { path: "negocio-moderador/:id-negocio", component: NegocioModeradorComponent, canActivate: [RolesGuard],data: { expectedRole: ["MODERADOR"] } },
+    { path: "eliminar-moderador", component: EliminarCuentaModeradorComponent, canActivate: [RolesGuard],data: { expectedRole: ["MODERADOR"] } },
+    { path: "cambiar-password-moderador", component: CambiarPasswordModeradorComponent, canActivate: [RolesGuard],data: { expectedRole: ["MODERADOR"] } },
     { path: "**", pathMatch: "full", redirectTo: "" }
 ];

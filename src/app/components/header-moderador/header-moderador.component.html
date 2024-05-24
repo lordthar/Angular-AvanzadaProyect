@@ -1,6 +1,6 @@
 <header class='border-b bg-white font-sans min-h-[60px] px-10 py-3 relative tracking-wide z-50'>
     <div class='flex flex-wrap items-center max-lg:gap-y-6 max-sm:gap-x-4'>
-        <img src="assets/logoUnilocal.png" alt="logo" class='w-36' />
+        <img routerLink="/moderador" src="assets/logoUnilocal.png" alt="logo" class='w-36' />
 
 
         <div id="collapseMenu"
@@ -23,23 +23,23 @@
                             class='w-36' />
                     </a>
                 </li>
-                <li class='max-lg:border-b max-lg:py-3'><a href='javascript:void(0)'
+                <li class='max-lg:border-b max-lg:py-3'><a routerLink="/moderador"
                         class='hover:text-[#007bff] text-[15px] text-[#007bff] block font-bold'>Home</a></li>
                 <li class='group max-lg:border-b max-lg:py-3 relative'>
-                    <a href='javascript:void(0)'
+                    <a href='javascript:void(0)' routerLink="/cambiar-password-moderador"
                         class='hover:text-[#007bff] text-gray-600 font-bold text-[15px] lg:hover:fill-[#007bff] block'>
-                        Pages
+                        Cambiar password
                     </a>
                 </li>
                 <li class='group max-lg:border-b max-lg:py-3 relative'>
-                    <a href='javascript:void(0)'
+                    <a href='javascript:void(0)' routerLink="/eliminar-moderador"
                         class='hover:text-[#007bff] text-gray-600 font-bold text-[15px] lg:hover:fill-[#007bff] block'>
-                        Blog
+                        Eliminar Moderador
                     </a>
                 </li>
             </ul>
         </div>
-        <button class="lg:flex lg:absolute lg:left-full lg:-translate-x-full p-4">
+        <button (click)="logout()" class="lg:flex lg:absolute lg:left-full lg:-translate-x-full p-4">
             <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
                 <path fill="currentColor"
                     d="M5 3h6a3 3 0 0 1 3 3v4h-1V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-4h1v4a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3m3 9h11.25L16 8.75l.66-.75l4.5 4.5l-4.5 4.5l-.66-.75L19.25 13H8z" />
@@ -63,14 +63,6 @@
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </button>
             </div>
-            <select class="border border-black p-1 h-[40px] rounded-full text-center" name="Seleccionadors"
-                id="">
-                <option value="Pepe">Seleccione una opcion</option>
-                <option value="Pepe">val</option>
-                <option value="Pepe">val</option>
-                <option value="Pepe">val</option>
-                <option value="Pepe">val</option>
-            </select>
         </div>
     </form>
 </header>
