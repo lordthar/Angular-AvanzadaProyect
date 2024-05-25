@@ -1,35 +1,50 @@
-<form #f="ngForm" (ngSubmit)="registrar()" class="bg-blue-100 rounded-lg p-8 max-w-md mx-auto">
+<form #f="ngForm" class="bg-blue-100 rounded-lg p-8 max-w-md mx-auto">
     <div class="mb-4">
-        <label class="block text-blue-900 mb-2">Nombre: </label>
-        <input type="text" name="nombre" [(ngModel)]="registroClienteDTO.nombre" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500" />
+      <label class="block text-blue-900 mb-2">Nombre: </label>
+      <input type="text" name="nombre" [(ngModel)]="registroClienteDTO.nombre" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500" />
     </div>
     <div class="mb-4">
-        <label class="block text-blue-900 mb-2">Foto: </label>
-        <input type="file" name="fotoPerfil" (change)="onFileChange($event)" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500" />
+      <label class="block text-blue-900 mb-2">Username: </label>
+      <input type="text" name="nickname" [(ngModel)]="registroClienteDTO.nickname" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500" />
+    </div>
+    <div class="col-sm-8">
+      <input type="file" class="form-control" name="foto" (change)="onFileChange($event)" />
+    </div>
+    <div class="col-sm-2">
+      <button type="submit" [disabled]="archivos == null" class="btn btn-primary" (click)="subirImagen()">
+        <i class="fa-solid fa-cloud-arrow-up me-2"></i>Subir Foto
+      </button>
+    </div>
+    <div>
+      <label>Ciudad: </label>
+      <select name="ciudadResidencia" required [(ngModel)]="registroClienteDTO.ciudadRecidencia" >
+        <option value="" selected >Seleccione una ciudad</option>
+        @for (item of ciudades; track $index) { <option [value]="item" >{{item}}</option> }
+      </select>
     </div>
     <div class="mb-4">
-        <label class="block text-blue-900 mb-2">Ciudad: </label>
-        <select name="ciudadResidencia" required [(ngModel)]="registroClienteDTO.ciudadResidencia" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
-            <option value="" selected>Seleccione una ciudad</option>
-            @for (item of ciudades; track $index) { <option [value]="item" >{{item}}</option> }
-        </select>
+      <label class="block text-blue-900 mb-2">Correo electrónico: </label>
+      <input type="email" name="email" [(ngModel)]="registroClienteDTO.email" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500" />
     </div>
     <div class="mb-4">
-        <label class="block text-blue-900 mb-2">Username: </label>
-        <input type="text" name="nickname" [(ngModel)]="registroClienteDTO.nickname" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500" />
+      <label class="block text-blue-900 mb-2">Teléfonos: </label>
+      <div *ngFor="let telefono of registroClienteDTO.telefonos; let i = index" class="flex mb-2">
+        <input type="text" [(ngModel)]="registroClienteDTO.telefonos[i]" name="telefono{{i}}" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500" />
+        <button type="button" class="ml-2 bg-red-500 text-white px-3 py-2 rounded-lg" (click)="eliminarTelefono(i)" *ngIf="registroClienteDTO.telefonos.length > 1">Eliminar</button>
+      </div>
+      <button type="button" class="mt-2 bg-green-500 text-white px-3 py-2 rounded-lg" (click)="agregarTelefono()">Agregar Teléfono</button>
     </div>
     <div class="mb-4">
-        <label class="block text-blue-900 mb-2">Correo electrónico: </label>
-        <input type="email" name="email" [(ngModel)]="registroClienteDTO.email" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500" />
+      <label class="block text-blue-900 mb-2">Contraseña: </label>
+      <input type="password" name="password" [(ngModel)]="registroClienteDTO.password" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500" />
     </div>
     <div class="mb-4">
-        <label class="block text-blue-900 mb-2">Contraseña: </label>
-        <input type="password" name="password" [(ngModel)]="registroClienteDTO.password" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500" />
+      <label class="block text-blue-900 mb-2">Repetir contraseña: </label>
+      <input type="password" name="confirmaPassword" [(ngModel)]="registroClienteDTO.confirmarPassword" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500" />
     </div>
-    <div class="mb-4">
-        <label class="block text-blue-900 mb-2">Repetir contraseña: </label>
-        <input type="password" name="confirmaPassword" [(ngModel)]="registroClienteDTO.confimarPassword" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500" />
-    </div>
-    @if (!sonIguales()) { <p class="text-red-500">Las contraseñas no coinciden</p> }
-    <button type="submit" [disabled]="f.invalid || !sonIguales()" class="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Registrarse</button>
-</form>
+    <div *ngIf="!sonIguales()" class="text-red-500">Las contraseñas no coinciden</div>
+  
+    <button type="submit" [disabled]="f.invalid || !sonIguales()" (click)="registrar()">Registrarse</button>
+    <app-alerta-component [alerta]="alerta"></app-alerta-component>
+  </form>
+  

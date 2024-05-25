@@ -1,10 +1,13 @@
+import { ImagenDTO } from "./imagen-dto";
 import { ubicacionDTO } from "./ubicacionDTO";
 export class ItemNegocioDTO {
 constructor(
-public codigoNegocio: string = '',
 public nombre: string = '',
-public imagenDestacada: string = '',
+public descripcion: string = '',
+public codigoCliente: string = '',
+public codigoNegocio: string = '',
 public tipoNegocio: string = '',
+public imagenes: string[]=[], 
 public ubicacion: ubicacionDTO = new ubicacionDTO(),
 public calificacionPromedio: number = 0,
 public estadoNegocio:string = ''

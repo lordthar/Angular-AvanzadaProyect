@@ -19,21 +19,29 @@ export class TokenService {
   }
 
   public isLogged(): boolean {
-    if (this.getToken()) {
-      return true;
-    }
-      return false;
+    return !!this.getToken();
   }
 
     public login(token: string) {
-      this.setToken(token);
-      this.router.navigate(["/gestion-negocios"]);
+    this.setToken(token);
+    this.router.navigate(["/inicio-cliente"]).then(() => {
+    window.location.reload();
+    });
     }
+
+  public loginModerador(token: string) {
+    this.setToken(token);
+    this.router.navigate(["/moderador"]).then(() => {
+      window.location.reload();
+    });
+  }
 
     public logout() {
       window.sessionStorage.clear();
-      this.router.navigate(["/"]);
-    }
+      this.router.navigate(["/"]).then(() => {
+      window.location.reload();
+      });
+      }
 
     private decodePayload(token: string): any {
       const payload = token!.split(".")[1];
@@ -41,4 +49,39 @@ export class TokenService {
       const values = JSON.parse(payloadDecoded);
       return values;
       }
+
+      public getRole(): string {
+        const token = this.getToken();
+        if (token) {
+        const values = this.decodePayload(token);
+        return values.rol;
+        }
+        return "";
+        }
+      public getEmail(): string {
+        const token = this.getToken();
+        if (token) {
+        const values = this.decodePayload(token);
+        return values.sub;
+        }
+        return "";
+        }
+
+        public getCodigo(): string {
+          const token = this.getToken();
+          if (token) {
+          const values = this.decodePayload(token);
+          return values.id;
+          }
+          return "";
+          }
+
+          public getContraseña(): string {
+            const token = this.getToken();
+            if (token) {
+              const values = this.decodePayload(token);
+              return values.password; 
+            }
+            return "";
+          }
 }

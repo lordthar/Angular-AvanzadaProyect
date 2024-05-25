@@ -1,0 +1,47 @@
+<div class="container max-w-md mx-auto xl:max-w-3xl h-full flex bg-white rounded-lg shadow overflow-hidden mt-20">
+    <div class="relative hidden xl:block xl:w-1/2 h-full">
+      <img class="absolute h-auto w-full object-cover" src="./assets/img/favicon.png" alt="my zomato" />
+    </div>
+    <div class="w-full xl:w-1/2 p-8">
+      <form (ngSubmit)="login()" #loginForm="ngForm">
+        <h1 class="text-2xl font-bold">Inicia Sesion con UniLocal!</h1>
+        <div>
+          <span class="text-gray-600 text-sm">Don't have an account?</span>
+          <span class="text-gray-700 text-sm font-semibold">Sign up</span>
+        </div>
+        <div class="mb-4 mt-6">
+          <label class="block text-gray-700 text-sm font-semibold mb-2" for="email">Email</label>
+          <input 
+            [(ngModel)]="loginDTO.email" 
+            name="email" 
+            class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-200 leading-tight focus:outline-none focus:shadow-outline h-10" 
+            id="email" 
+            type="text" 
+            placeholder="Your email address" 
+            required
+          />
+        </div>
+        <div class="mb-6 mt-6">
+          <label class="block text-gray-700 text-sm font-semibold mb-2" for="password">Password</label>
+          <input 
+            [(ngModel)]="loginDTO.password" 
+            name="password" 
+            class="text-sm bg-gray-200 appearance-none rounded w-full py-2 px-3 text-gray-700 mb-1 leading-tight focus:outline-none focus:shadow-outline h-10" 
+            id="password" 
+            type="password" 
+            placeholder="Your password" 
+            required
+          />
+          <a class="inline-block align-baseline text-sm text-gray-600 hover:text-gray-800" href="#">¿Olvidaste tu contraseña?</a>
+        </div>
+        <div class="flex w-full mt-8">
+          <button class="w-full bg-gray-800 hover:bg-grey-900 text-white text-sm py-2 px-4 font-semibold rounded focus:outline-none focus:shadow-outline h-10" type="submit">
+            Sign in
+          </button>
+          <app-alerta-component [alerta]="alerta"></app-alerta-component>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+    

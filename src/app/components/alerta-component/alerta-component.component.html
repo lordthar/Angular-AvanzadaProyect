@@ -1,0 +1,30 @@
+<div *ngIf="alerta" [ngClass]="{
+    'bg-green-100 border-green-500 text-green-700': alerta.tipo === 'success',
+    'bg-red-100 border-red-500 text-red-700': alerta.tipo === 'error',
+    'bg-yellow-100 border-yellow-500 text-yellow-700': alerta.tipo === 'warning',
+    'bg-blue-100 border-blue-500 text-blue-700': alerta.tipo === 'info'
+}" class="relative mt-3 p-4 border-l-4 rounded-lg shadow-md flex items-start">
+    <div class="flex-shrink-0">
+        <svg *ngIf="alerta.tipo === 'success'" class="h-5 w-5 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm-1-11l4 4-1.4 1.4L9 10.8 8.4 10.2l-1.4 1.4L5.6 10l4-4z" clip-rule="evenodd" />
+        </svg>
+        <svg *ngIf="alerta.tipo === 'error'" class="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm2-11a1 1 0 00-2 0v4a1 1 0 002 0V7zm-2 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
+        </svg>
+        <svg *ngIf="alerta.tipo === 'warning'" class="h-5 w-5 text-yellow-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M8.257 3.099c.764-1.36 2.72-1.36 3.486 0l5.481 9.73c.75 1.33-.213 3.05-1.742 3.05H4.518c-1.53 0-2.492-1.72-1.742-3.05l5.481-9.73zm1.743 6.901a1 1 0 10-2 0v2a1 1 0 002 0V10zm-1 4a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
+        </svg>
+        <svg *ngIf="alerta.tipo === 'info'" class="h-5 w-5 text-blue-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v1a1 1 0 002 0V7zm-1 3a1 1 0 000 2h.01a1 1 0 000-2H10z" clip-rule="evenodd" />
+        </svg>
+    </div>
+    <div class="ml-3">
+        <p class="text-sm">{{alerta.mensaje}}</p>
+    </div>
+    <button type="button" class="absolute top-0 bottom-0 right-0 px-4 py-3" aria-label="Close" (click)="ocultar()">
+        <svg class="h-5 w-5 text-gray-500 hover:text-gray-900" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10 8.586l4.293-4.293a1 1 0 011.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 011.414-1.414L10 8.586z" clip-rule="evenodd" />
+        </svg>
+    </button>
+</div>
+

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
+import { MapaService } from '../../servicios/mapa.service';
 @Component({
   selector: 'app-header-inicio',
   standalone: true,
@@ -9,7 +10,9 @@ import { Router, RouterModule } from '@angular/router';
 })
 export class HeaderInicioComponent {
  
-  constructor(private router: Router) { }
+  constructor(private router: Router, private mapaService: MapaService) {
+
+  }
   public iraBusqueda(valor:string){
   if(valor){
   this.router.navigate(["/busqueda", valor]);
