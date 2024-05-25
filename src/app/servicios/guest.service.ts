@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 providedIn: 'root'
 })
 export class GuestService {
-private publicoURL = "http://localhost:8080/api/publico";
+private publicoURL = "https://unilocal-proyect.onrender.com/api/publico";
 constructor(private http: HttpClient) { }
 public listarCiudades(): Observable<MensajeDTO> {
 return this.http.get<MensajeDTO>(`${this.publicoURL}/listar-ciudades`);

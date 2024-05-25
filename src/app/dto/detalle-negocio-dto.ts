@@ -9,7 +9,7 @@ export class DetalleNegocioDTO {
         public descripcion: string = '',
         public codigoCliente: string = '',
         public codigoNegocio: string = '',
-        public imagenes: string[]= [],
+        public imagenes: ImagenDTO[]= [],
         public telefonos: string[] = [],
         public horarios: horariosDTO[] = [],
         public tipoNegocio: string = '',

@@ -9,7 +9,7 @@ import { ActualizarClienteDTO } from '../dto/actualizar-cliente-dto';
 })
 export class ClienteService {
 
-  private clientURL = "http://localhost:8080/api/clientes"
+  private clientURL = "https://unilocal-proyect.onrender.com/api/clientes"
 
   constructor(private http: HttpClient) {}
   public obtenerCliente (codigo: string): Observable<MensajeDTO> {

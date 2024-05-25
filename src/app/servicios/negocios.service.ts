@@ -10,7 +10,7 @@ import { ActualizarNegocioDTO } from '../dto/actualizar-negocio-dto';
 })
 export class NegociosService {
     negocios: ItemNegocioDTO[];
-    private negociosURL = "http://localhost:8080/api/guests";
+    private negociosURL = "https://unilocal-proyect.onrender.com/api/guests";
     constructor(private http: HttpClient) {
         this.negocios = [];
     }

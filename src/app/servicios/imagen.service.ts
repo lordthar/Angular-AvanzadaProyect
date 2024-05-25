@@ -7,7 +7,7 @@ import { ImagenDTO } from '../dto/imagen-dto';
 providedIn: 'root'
 })
 export class ImagenService {
-private imgURL = "http://localhost:8080/api/imagenes";
+private imgURL = "https://unilocal-proyect.onrender.com/api/imagenes";
 
 constructor(private http: HttpClient) { }
 public subir(imagen: FormData): Observable<MensajeDTO> {

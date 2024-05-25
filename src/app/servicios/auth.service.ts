@@ -9,7 +9,7 @@ providedIn: 'root'
 })
 export class AuthService {
 
-private authURL = "http://localhost:8080/api/auth";
+private authURL = "https://unilocal-proyect.onrender.com/api/auth";
   constructor(private http: HttpClient) { }
 
   public registrarCliente(cliente: RegistroClienteDTO): Observable<MensajeDTO> {

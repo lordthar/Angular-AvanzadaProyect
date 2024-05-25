@@ -11,7 +11,7 @@ import { AprobarNegocioDto } from '../dto/aprobar-negocio-dto';
 })
 export class ModeradorService {
 
-  private moderadoresUrl = "http://localhost:8080/api/moderadores";
+  private moderadoresUrl = "https://unilocal-proyect.onrender.com/api/moderadores";
 
   constructor(private http: HttpClient) { }
 
