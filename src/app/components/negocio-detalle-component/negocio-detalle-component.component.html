@@ -3,60 +3,73 @@
     <div class="relative">
       <div class="flex items-center justify-center">
         <div class="carousel flex overflow-x-auto">
-            <img src="" alt="Restaurant Image" class="rounded-lg mr-4">
-            <img src="" alt="Restaurant Image" class="rounded-lg mr-4">
-            <img src="" alt="Restaurant Image" class="rounded-lg">
+          <img *ngFor="let imagen of negocio.imagenes" [src]="imagen" alt="Image" class="rounded-lg mr-4">
         </div>
       </div>
-      <button class="absolute top-1/2 left-0 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full" onclick="prevSlide()">‹</button>
-      <button class="absolute top-1/2 right-0 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full" onclick="nextSlide()">›</button>
+      <button class="absolute top-1/2 left-0 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full" >‹</button>
+      <button class="absolute top-1/2 right-0 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full" >›</button>
     </div>
     <h2 class="text-2xl font-bold mt-4">{{negocio.nombre}}</h2>
     <div class="flex items-center mt-1">
         <span class="text-yellow-400 text-lg">
-            ★★★★☆
+            ★★★★☆ 4.5
         </span>
         <span class="text-zinc-600 ml-2">{{negocio.calificacionPromedio}}</span>
+        <div>
+          <span  class="cursor-pointer">
+            <i class="fas fa-heart text-red-500" ></i>
+          </span>
+      </div>
     </div>
     <p class="text-zinc-800 mt-1">{{ negocio.tipoNegocio }}</p>
-    <div class="flex justify-between text-blue-600 text-sm font-semibold mt-4">
-        <a href="#" class="hover:underline">Vista general</a>
-        <a href="#" class="hover:underline">Reseñas</a>
-        <a href="#" class="hover:underline">Información</a>
-    </div>
     <div>
         <button (click)="mostrarRuta()">Mostrar Ruta</button>
     </div>
-    <div class="flex items-center space-x-2 mt-4">
-        <span class="bg-green-200 text-green-800 text-xs font-bold px-2 py-1 rounded">Consumo en el lugar</span>
-        <span class="bg-green-200 text-green-800 text-xs font-bold px-2 py-1 rounded">Para llevar</span>
-        <span class="bg-green-200 text-green-800 text-xs font-bold px-2 py-1 rounded">Entrega sin contacto</span>
-    </div>
     <p class="text-zinc-600 text-sm mt-4">Carrera 16 #21 N-45, Armenia, Quindío</p>
+    <div>
+        <button (click)="abrirPopupPQRS()" class="bg-blue-500 text-white px-4 py-2 rounded mt-4">Enviar PQRS</button>
+    </div>
+    <div class="mt-4">
+        <h3 class="text-lg font-bold">Comentarios</h3>
+        <div class="chat-box bg-gray-100 p-4 rounded-lg h-64 overflow-y-auto">
+            <!-- Simulated comments -->
+            <!-- <div *ngFor="let comentario of comentarios" class="bg-white p-2 mt-2 rounded shadow-sm">
+                <p class="text-sm text-gray-800">{{ comentario.usuario }}: {{ comentario.texto }}</p>
+            </div> -->
+        </div>
+        <!-- <div class="mt-2">
+            <input [(ngModel)]="nuevoComentario" type="text" placeholder="Escribe un comentario..." class="border rounded w-full p-2">
+            <button (click)="agregarComentario()" class="bg-blue-500 text-white px-4 py-2 rounded mt-2">Enviar</button>
+        </div> -->
+    </div>
   </div>
 </div>
 
-<script>
-  let currentSlide = 0;
-  const slides = document.querySelectorAll('.carousel img');
-
-  function showSlide() {
-      slides.forEach((slide, index) => {
-          if (index === currentSlide) {
-              slide.style.display = 'inline-block';
-          } else {
-              slide.style.display = 'none';
-          }
-      });
-  }
-
-  function nextSlide() {
-      currentSlide = (currentSlide + 1) % slides.length;
-      showSlide();
-  }
-
-  function prevSlide() {
-      currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-      showSlide();
-  }
-</script>
+<div *ngIf="mostrarPopupPQRS" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+  <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-4 flex max-w-5xl mx-auto">
+    <div class="p-8 w-full">
+      <h2 class="text-xl font-bold mb-4">Enviar PQRS</h2>
+      <div class="mb-4">
+        <label class="block text-gray-700">Tipo de PQRS</label>
+        <select class="border rounded w-full p-2 mt-2">
+          <option value="Petición">Petición</option>
+          <option value="Queja">Queja</option>
+          <option value="Reclamo">Reclamo</option>
+          <option value="Sugerencia">Sugerencia</option>
+        </select>
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700">Título</label>
+        <input type="text" class="border rounded w-full p-2">
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700">Descripción</label>
+        <textarea class="border rounded w-full p-2" rows="4"></textarea>
+      </div>
+      <div class="flex justify-end">
+        <button class="bg-blue-500 text-white px-4 py-2 rounded">Enviar</button>
+        <button (click)="CancelarPQRS()" class="bg-gray-300 text-black px-4 py-2 rounded ml-2">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>

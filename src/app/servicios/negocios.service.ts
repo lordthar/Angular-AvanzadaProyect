@@ -4,6 +4,7 @@ import { RegistroNegocioDTO } from '../dto/registroNegocioDTO';
 import { HttpClient } from '@angular/common/http';
 import { MensajeDTO } from '../dto/mensaje-dto';
 import { Observable } from 'rxjs';
+import { ActualizarNegocioDTO } from '../dto/actualizar-negocio-dto';
 @Injectable({
     providedIn: 'root'
 })
@@ -17,11 +18,11 @@ export class NegociosService {
     return this.http.post<MensajeDTO>(`${this.negociosURL}/crear-negocio`, negocioNuevo);
     }
 
-    public editarNegocio(negocioNuevo: RegistroNegocioDTO): Observable<MensajeDTO> {
+    public editarNegocio(negocioNuevo: ActualizarNegocioDTO): Observable<MensajeDTO> {
         return this.http.post<MensajeDTO>(`${this.negociosURL}/editar-negocio`, negocioNuevo);
         }
-    public buscar(nombre: string): Observable<ItemNegocioDTO[]> {
-        return this.http.get<ItemNegocioDTO[]>(`${this.negociosURL}/filtrar-por-nombre/${nombre}`);
+    public buscar(nombre: string): Observable<MensajeDTO> {
+        return this.http.get<MensajeDTO>(`${this.negociosURL}/filtrar-por-nombre/${nombre}`);
       }
     public obtener(codigoNegocio: string): Observable<MensajeDTO> {
     return this.http.get<MensajeDTO>(`${this.negociosURL}/buscarNegocio/${codigoNegocio}`);

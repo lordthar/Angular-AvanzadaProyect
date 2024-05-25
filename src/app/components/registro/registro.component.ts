@@ -24,6 +24,7 @@ export class RegistroComponent {
     this.ciudades = [];
     this.cargarCiudades();
   }
+
   public registrar() {
     if (this.registroClienteDTO.fotoPerfil != "") {
       this.authService.registrarCliente(this.registroClienteDTO).subscribe({

@@ -4,11 +4,12 @@ import { ImagenDTO } from "./imagen-dto";
 import { ubicacionDTO } from "./ubicacionDTO";
 export class DetalleNegocioDTO {
     constructor(
-        public codigoNegocio: string = '',
         public nombre: string = '',
+        public confirmarNombre: string = '',
         public descripcion: string = '',
         public codigoCliente: string = '',
-        public imagenes: ImagenDTO[] = [],
+        public codigoNegocio: string = '',
+        public imagenes: string[]= [],
         public telefonos: string[] = [],
         public horarios: horariosDTO[] = [],
         public tipoNegocio: string = '',
