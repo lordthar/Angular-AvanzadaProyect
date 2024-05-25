@@ -18,34 +18,33 @@ styleUrl: './busqueda.component.css'
 })
 export class BusquedaComponent implements OnInit {
 textoBusqueda: string;
-resultados: ItemNegocioDTO[];
+resultadosBusqueda: ItemNegocioDTO[];
 negocioSeleccionado: ItemNegocioDTO = new ItemNegocioDTO();
 mostrarCard: boolean = false;
 private directions!: MapboxDirections;
 constructor(private route: ActivatedRoute, private negociosService: NegociosService, private mapaService: MapaService) {
-    this.resultados = [];  
+    this.resultadosBusqueda = [];  
     this.textoBusqueda = "";
     this.route.params.subscribe(params => {
     this.textoBusqueda = params['texto'];
 
     });
 }
-    ngOnInit(): void {
-        this.mapaService.crearMapa();
-        this.buscarNegocios(this.textoBusqueda);
-        this.directions = new MapboxDirections({
-            accessToken: mapboxgl.accessToken,
-            unit: 'metric',
-            profile: 'mapbox/driving',
-            controls: { inputs: true, instructions: true }
-          });
-          this.mapaService.mapa.addControl(this.directions, 'top-left');
-        this.mapaService.marcadorSeleccionado.subscribe((negocio: ItemNegocioDTO) => {
-            this.negocioSeleccionado = negocio;
-    
-        });
-    }
+ngOnInit(): void {
+    this.mapaService.crearMapa();
+    this.buscarNegocios(this.textoBusqueda);
+    this.directions = new MapboxDirections({
+      accessToken: mapboxgl.accessToken,
+      unit: 'metric',
+      profile: 'mapbox/driving',
+      controls: { inputs: true, instructions: true }
+    });
+    this.mapaService.mapa.addControl(this.directions, 'top-left');
+    this.mapaService.marcadorSeleccionado.subscribe((negocio: ItemNegocioDTO) => {
+      this.negocioSeleccionado = negocio;
+    });
 
+  }
     onMapClick(event: MouseEvent): void {
     const target = event.target as HTMLElement;
     const esMarcador = target.classList.contains('marker');
@@ -69,9 +68,9 @@ constructor(private route: ActivatedRoute, private negociosService: NegociosServ
     buscarNegocios(nombre: string): void {
         this.negociosService.buscar(nombre).subscribe({
           next: (resultados) => {
-              this.resultados = resultados;
-              console.log(this.resultados);
-              this.mapaService.pintarMarcadores(this.resultados);
+              this.resultadosBusqueda = resultados.respuesta;
+              console.log(this.resultadosBusqueda);
+              this.mapaService.pintarMarcadores(this.resultadosBusqueda);
           },
           error: (error) => {
             console.error('Error al buscar negocios', error);

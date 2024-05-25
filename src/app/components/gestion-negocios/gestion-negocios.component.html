@@ -15,26 +15,28 @@
             <div class="p-4 flex flex-col justify-between w-3/4">
                 <div>
                     <h2 class="text-lg font-semibold">Nombre Negocio: {{ item.nombre }}</h2>
+                    <p class="text-lg font-semibold">Descripción : {{item.descripcion}}</p>
                 </div>
                 <div class="flex flex-col items-end space-y-4 mt-3">
-                    <button class="flex items-center space-x-1 text-red-500" (click)="mostrarPopupEliminar(item.codigoCliente)">
-                        <span class="iconify" data-icon="mdi:delete"></span>
-                        <span>Eliminar</span>
-                    </button>
-                    <button class="flex items-center space-x-1 text-blue-500" (click)="mostrarPopupEditar(item)">
-                        <span class="iconify" data-icon="mdi:pencil" ></span>
-                        <span>Editar</span>
-                    </button>
-                    <button class="flex items-center space-x-1 text-gray-500">
-                        <span class="iconify" data-icon="mdi:comment-text"></span>
-                        <span>Comentarios y calificaciones</span>
-                    </button>
-                    <button class="flex items-center space-x-1 text-gray-500">
-                        <span class="iconify" data-icon="mdi:help-circle"></span>
-                        <span>PQRS</span>
-                    </button>
-                </div>
+                  <button class="flex items-center space-x-1 text-red-500" (click)="mostrarPopupEliminar(item.codigoNegocio)">
+                      <span class="iconify" data-icon="mdi:delete"></span>
+                      <span>Eliminar</span>
+                  </button>
+                  <button class="flex items-center space-x-1 text-blue-500" (click)="mostrarPopupEditar(item, item.codigoNegocio)">
+                      <span class="iconify" data-icon="mdi:pencil" ></span>
+                      <span>Editar</span>
+                  </button>
+                  <button class="flex items-center space-x-1 text-gray-500">
+                      <span class="iconify" data-icon="mdi:comment-text"></span>
+                      <span>Comentarios y calificaciones</span>
+                  </button>
+                  <button class="flex items-center space-x-1 text-gray-500">
+                      <span class="iconify" data-icon="mdi:help-circle"></span>
+                      <span>PQRS</span>
+                  </button>
+              </div>
             </div>
+            
         </div>
     </div>
 </div>
@@ -93,14 +95,13 @@
   </div>
   
 
-<div *ngIf="mostrarPopup" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+  <div *ngIf="mostrarPopup" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
     <div class="bg-white rounded-lg p-8 max-w-md w-full">
       <h2 class="text-xl font-bold mb-4">¿Estás seguro?</h2>
       <p>Estás a punto de eliminar tu negocio</p>
-      <p>Para confirmar, por favor ingresa tu contraseña</p>
-      <input [(ngModel)]="password" type="password" class="border rounded w-full p-2 mt-2 mb-4">
-      <div *ngIf="password !== password" class="text-red-500 mb-2">La contraseña no es correcta</div>
-      <button (click)="confirmarEliminar()" [disabled]="password !== password" class="bg-blue-500 text-white px-4 py-2 rounded">Aceptar</button>
+      <p>Para confirmar, por favor ingresa el nombre de tu negocio</p>
+      <input [(ngModel)]="nombreNegocioInput" type="text" class="border rounded w-full p-2 mt-2 mb-4">
+      <button (click)="confirmarEliminar()" [disabled]="!sonIguales()" class="bg-blue-500 text-white px-4 py-2 rounded">Aceptar</button>
       <button (click)="cancelarEliminar()" class="bg-gray-300 text-black px-4 py-2 rounded ml-2">Cancelar</button>
     </div>
   </div>

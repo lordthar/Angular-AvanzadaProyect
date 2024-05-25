@@ -15,6 +15,7 @@ export class MapaService {
   private directions!: MapboxDirections;
   popup: any;
   marcadorSeleccionado: EventEmitter<ItemNegocioDTO> = new EventEmitter<ItemNegocioDTO>();
+  private disableAddRoute: boolean = false;
   constructor(private negociosService: NegociosService) {
     mapboxgl.accessToken = 'pk.eyJ1IjoibGFudGhhcnVzIiwiYSI6ImNsdnBkanNwZDAweTUybXF0YzRsempqZngifQ.YYVc3CGkIxdnrb6_JxxA4w';
     this.marcadores = [];
@@ -67,8 +68,13 @@ export class MapaService {
       const marker = new mapboxgl.Marker(markerElement)
         .setLngLat([negocio.ubicacion.longitud, negocio.ubicacion.latitud])
         .addTo(this.mapa);
-      marker.getElement().addEventListener('click', () => {
-        this.marcadorSeleccionado.emit(negocio);
+  
+      marker.getElement().addEventListener('click', (event: MouseEvent) => {
+        if (!this.disableAddRoute) {
+          this.marcadorSeleccionado.emit(negocio);
+        }
+        this.disableAddRoute = true;
+        setTimeout(() => this.disableAddRoute = false, 0);
       });
       this.marcadores.push(marker);
     });
@@ -76,7 +82,6 @@ export class MapaService {
 
   public mostrarNegociosCercanos(latitude: number, longitude: number): void {
     const negocios = this.negociosService.listarNegocios();
-  
     negocios.forEach(negocio => {
       const markerElement = document.createElement('div');
       markerElement.className = 'marker';
@@ -86,7 +91,6 @@ export class MapaService {
       marker.getElement().addEventListener('click', () => {
         this.marcadorSeleccionado.emit(negocio);
       });
-  
       this.marcadores.push(marker);
     });
   }
